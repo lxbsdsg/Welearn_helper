@@ -8,7 +8,7 @@ $root = Split-Path -Parent $PSScriptRoot
 Push-Location $root
 try {
     & $Python -m pip install --disable-pip-version-check -r requirement.txt -r requirements-dev.txt
-    if ($LASTEXITCODE -ne 0) { throw "依赖安装失败" }
+    if ($LASTEXITCODE -ne 0) { throw "Dependency installation failed" }
 
     & $Python -m PyInstaller `
         --noconfirm --clean `
@@ -17,9 +17,9 @@ try {
         --distpath dist `
         --workpath build `
         web_gui.py
-    if ($LASTEXITCODE -ne 0) { throw "PyInstaller 打包失败" }
+    if ($LASTEXITCODE -ne 0) { throw "PyInstaller build failed" }
 
-    Write-Host "打包完成: $root\dist\WelearnHelper.exe"
+    Write-Host "Build complete: $root\dist\WelearnHelper.exe"
 } finally {
     Pop-Location
 }
